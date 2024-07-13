@@ -3,9 +3,9 @@
 apiVersion: v1
 kind: Service
 metadata: 
-  name: mywebservice-clt-ip   # service name for creating cluster ip service
+  name: mywebservice-clt-ip   # giving service name for creating cluster ip service
   labels:
-    app: mywebapp-clusterip  #label for the cluster ip service 
+    app: mywebapp-clusterip  # giving label for the cluster ip service 
 spec: 
   type: ClusterIP
   ports:
