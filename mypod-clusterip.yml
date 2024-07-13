@@ -1,0 +1,16 @@
+# creating cluster ip for service
+# already defaultly we have the cluster ip to access the internal access
+apiVersion: v1
+kind: Service
+metadata: 
+  name: mywebservice-clt-ip   # service name for creating cluster ip service
+  labels:
+    app: mywebapp-clusterip  #label for the cluster ip service 
+spec: 
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: mywebapp   # pod label name while creating the pod  (by using replicaset or deployment)
