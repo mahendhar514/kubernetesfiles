@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  name: mywebservice-nodeport   # giving service name for creating nodeport service
+  labels:
+    app: mywebapp-nodport  # giving label name for the nodeport service 
+spec: 
+  type: NodePort  # creating NodPort service 
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: mywebapp   # pod label name while creating the pod  (by using replicaset or deployment)
