@@ -1,7 +1,7 @@
 # Create Cluster
 eksctl create cluster --name=eksdemo --region=ap-south-1 --zones=ap-south-1a,ap-south-1b --without-nodegroup
 
-eksctl create cluster --name mahi --region ap-south-1 --node-type t2.micro --nodes-min 2 --nodes-max 2 --zones ap-south-1a,ap-south-1b --ssh-access --ssh-public-key=pemkey
+eksctl create cluster --name mahi --region ap-south-1 --node-type t2.xlarge --nodes-min 2 --nodes-max 2 --zones ap-south-1a,ap-south-1b --ssh-access --ssh-public-key=pemkey
 
 
 # Create Public Node Group
