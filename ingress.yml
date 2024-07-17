@@ -1,0 +1,36 @@
+#https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.1/deploy/static/provider/cloud/deploy.yaml -install ingress controller 
+#while we are downloading the ingress controller it will create default namespace for it, 90% of user will use the ingress controller(mostly ingress-nginx) for the load balancer access in the k8s
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k8s-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /nginx(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: nginxservice     # we need to give the service name which we are created in the default namespace, service of clusterip
+            port:
+              number: 80    # this is default port number of pod container 
+      - path: /httpd(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: httpdservice   # we need to give the service name which we are created in the default namespace, service of clusterip
+            port:
+              number: 80
+      - path: /(.*)      # this is the default path for the loadbalance, we need to give the service name which we need to access the defaultly by ingress
+        pathType: Prefix
+        backend:
+          service:
+            name: nginxservice     # we need to give the service name which we are created in the default namespace, service of clusterip
+            port:
+              number: 80
