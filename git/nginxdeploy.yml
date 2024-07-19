@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployngnix
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: appnginx
+  template:
+    metadata: 
+      name: nginxapp
+      labels:
+        app: appnginx
+        type: ngnixapplication
+    spec:
+      containers:
+      - name: nginx-cont
+        image: nginx
+        ports:
+        - containerPort: 80
+        resources:
+          # You must specify requests for CPU to autoscale
+          # based on CPU utilization
+          requests:
+            cpu: "250m"
