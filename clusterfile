@@ -12,3 +12,28 @@ aws eks update-kubeconfig --name eksdemo  --region ap-south-1
 
 
 eksctl utils write-kubeconfig --cluster=eksdemo
+
+
+# Metric Server deployment ##
+
+The Kubernetes Metrics Server is an aggregator of resource usage data in your cluster, and it isn't deployed by default in Amazon EKS clusters.
+
+we need to deploy by following process 
+
+#Deploy the Metrics Server with the following command:
+
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
+
+#Verify that the metrics-server deployment is running the desired number of Pods with the following command.
+ 
+kubectl get deployment metrics-server -n kube-system
+
+kubectl top pod # to see pod load
+
+kubectl top node # to see node load 
+
+
+ingress load balancer for path based routing for kubernetes
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.1/deploy/static/provider/cloud/deploy.yaml
