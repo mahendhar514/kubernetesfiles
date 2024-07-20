@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: httpd-cont
-        image: httpd
+        image: nginx
         ports:
         - containerPort: 80
         resources:
