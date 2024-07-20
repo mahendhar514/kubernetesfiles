@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployhttpd
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: apphttpd
+  template:
+    metadata:
+      name: httpdpod
+      labels:
+        app: apphttpd
+        type: httpdapplication
+    spec:
+      containers:
+      - name: httpd-cont
+        image: httpd
+        ports:
+        - containerPort: 80
+        resources:
+          # You must specify requests for CPU to autoscale
+          # based on CPU utilization
+          requests:
+            cpu: "250m"
+
