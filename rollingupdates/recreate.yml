@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: deployhttpd
 spec:
+  strategy:
+    type: Recreate
   replicas: 4
   selector:
     matchLabels:
