@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myreplica # ReplicaSet name
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mywebapp #pod label tags need to match with replicaset tags
+  template:
+    metadata:
+      name: mypod
+      labels: 
+        app: mywebapp  # pod label tags with is matching with replicaset tags
+        type: application
+    spec:
+      containers:
+      - name: nginx-cont
+        image: nginx
